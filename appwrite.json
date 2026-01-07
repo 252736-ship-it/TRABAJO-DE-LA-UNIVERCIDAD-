@@ -5,7 +5,7 @@
     {
       "$id": "",
       "name": "myapp",
-      "buildRuntime": "node-22",
+      "buildRuntime": "node-21",
       "adapter": "static",
       "fallbackFile": "index.html",
       "installCommand": "npm install",
