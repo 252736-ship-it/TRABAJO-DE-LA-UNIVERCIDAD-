@@ -1,11 +1,11 @@
 {
-  "projectId": "",
+  "projectId": "<PROJECT_ID>",
   "projectName": "myapp",
   "sites": [
     {
-      "$id": "",
+      "$id": "<SITE_ID>",
       "name": "myapp",
-      "buildRuntime": "node-21",
+      "buildRuntime": "node-20",
       "adapter": "static",
       "fallbackFile": "index.html",
       "installCommand": "npm install",
