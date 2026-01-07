@@ -41,3 +41,6 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# ONNX Runtime WASM files (se generan con postinstall)
+public/ort/*.wasm
