@@ -1,0 +1,102 @@
+<div class="app-container">
+  <!-- Header -->
+  <header class="header">
+    <h1>{{ title() }}</h1>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Image Preview Area -->
+    <div class="image-preview-area">
+      @if (selectedImage()) {
+        <img [src]="selectedImage()" alt="Imagen seleccionada" class="preview-image" />
+      } @else {
+        <div class="placeholder">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z"/>
+          </svg>
+          <p class="placeholder-text">Selecciona o toma una foto<br>de una hoja de papa</p>
+        </div>
+      }
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn btn-camera" (click)="onCameraClick()">
+        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 15.2c1.77 0 3.2-1.43 3.2-3.2s-1.43-3.2-3.2-3.2-3.2 1.43-3.2 3.2 1.43 3.2 3.2 3.2zm9-9h-3.18l-1.83-2H8.01L6.18 6.2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-12c0-1.1-.9-2-2-2zm0 14H3V8.2h4.05l1.83-2h6.24l1.83 2H21v12z"/>
+        </svg>
+        Cámara
+      </button>
+      <button class="btn btn-gallery" (click)="onGalleryClick()">
+        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/>
+        </svg>
+        Galería
+      </button>
+    </div>
+
+    <!-- Info Card -->
+    <div class="info-card">
+      <div class="info-header">
+        <span class="info-icon">ℹ️</span>
+        <span class="info-title">Información</span>
+      </div>
+      <p class="info-text">Esta app usa IA generativa (Gemini). Detecta:</p>
+      <ul class="info-list">
+        <li>Tizón temprano (Early Blight)</li>
+        <li>Tizón tardío (Late Blight)</li>
+        <li>Hojas saludables</li>
+      </ul>
+    </div>
+
+    <!-- Result Card (aparece después del análisis) -->
+    @if (isAnalyzing() || analysisResult() || analysisError()) {
+      <div class="result-card">
+        <div class="result-header">
+          <span class="result-icon">🔬</span>
+          <span class="result-title">Resultado del Análisis</span>
+        </div>
+
+        @if (isAnalyzing()) {
+          <div class="analyzing-container">
+            <div class="spinner"></div>
+            <p class="analyzing-text">Analizando imagen con IA...</p>
+          </div>
+        } @else if (analysisResult()) {
+          <div class="result-content">
+            <div class="result-label" [style.border-color]="getResultColor()">
+              <span class="label-text" [style.color]="getResultColor()">{{ analysisResult()!.label }}</span>
+              <span class="confidence-badge" [style.background-color]="getResultColor()">
+                {{ getConfidencePercent() }}%
+              </span>
+            </div>
+            
+            @if (analysisResult()!.explanation) {
+              <div class="result-explanation">
+                <h4>Explicación</h4>
+                <p>{{ analysisResult()!.explanation }}</p>
+              </div>
+            }
+
+            @if (analysisResult()!.recommendations?.length) {
+              <div class="result-recommendations">
+                <h4>Recomendaciones</h4>
+                <ul>
+                  @for (rec of analysisResult()!.recommendations; track rec) {
+                    <li>{{ rec }}</li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        } @else if (analysisError()) {
+          <div class="result-error">
+            <span class="error-icon">⚠️</span>
+            <p>{{ analysisError() }}</p>
+          </div>
+        }
+      </div>
+    }
+  </main>
+</div>
