@@ -31,6 +31,7 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "dist/myapp/browser",
               "budgets": [
                 {
                   "type": "initial",

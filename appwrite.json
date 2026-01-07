@@ -1,0 +1,11 @@
+{
+  "projectId": "TU_PROJECT_ID",
+  "projectName": "myapp",
+  "sites": [
+    {
+      "siteId": "$ID",
+      "name": "myapp",
+      "buildPath": "dist/myapp/browser"
+    }
+  ]
+}
