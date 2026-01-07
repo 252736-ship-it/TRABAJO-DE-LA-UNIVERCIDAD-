@@ -10,7 +10,7 @@
       "fallbackFile": "index.html",
       "installCommand": "npm install",
       "buildCommand": "npm run build",
-      "outputDirectory": "dist/angular"
+      "outputDirectory": "./dist/angular/browser"
     }
   ]
 }
