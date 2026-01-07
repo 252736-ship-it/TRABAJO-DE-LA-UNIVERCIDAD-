@@ -1,11 +1,16 @@
 {
-  "projectId": "TU_PROJECT_ID",
+  "projectId": "",
   "projectName": "myapp",
   "sites": [
     {
-      "siteId": "$ID",
+      "$id": "",
       "name": "myapp",
-      "buildPath": "dist/myapp/browser"
+      "buildRuntime": "node-22",
+      "adapter": "static",
+      "fallbackFile": "index.html",
+      "installCommand": "npm install",
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist/myapp/browser"
     }
   ]
 }
